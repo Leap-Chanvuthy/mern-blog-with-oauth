@@ -11,6 +11,7 @@ const app = express();
 //middleware
 app.use(express.json());
 
+
 mongoose.connect(process.env.DB_URI)
     .then(() => {
         console.log('database connect sucessfully');
@@ -25,3 +26,13 @@ app.listen (process.env.PORT , ()=>{
 
 app.use('/api/user' , userRoute);
 app.use('/api/auth' , authRoute);
+
+app.use((err , req , res , next) => {
+    const statusCode = err.statusCode || 500;
+    const message = err.message || 'Internal server error';
+    res.status(statusCode).json({
+        success : false,
+        statusCode,
+        message
+    })
+})
