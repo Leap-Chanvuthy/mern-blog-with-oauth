@@ -1,6 +1,6 @@
 
-const test = (req , res) =>{
-    return res.json({'message' : 'This API is tested successfully'});
+const getUsers = async (req , res , next) =>{
+   return res.json({"message" : "Hello from users"});
 }
 
-module.exports = {test}
+module.exports = {getUsers};

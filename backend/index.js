@@ -1,4 +1,5 @@
 const express = require('express');
+const cors = require('cors');
 const mongoose = require('mongoose');
 
 const userRoute = require('./routes/userRoute');
@@ -10,6 +11,7 @@ const app = express();
 
 //middleware
 app.use(express.json());
+app.use(cors());
 
 
 mongoose.connect(process.env.DB_URI)
