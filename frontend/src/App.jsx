@@ -5,9 +5,9 @@ import SignIn from './pages/SignIn';
 import SignUp from './pages/SignUp';
 import About from './pages/About';
 import Header from './components/Header';
-
-
+import FooterComponent from './components/FooterComponent';
 import { BrowserRouter , Routes , Route } from 'react-router-dom';
+
 
 
 function App() {
@@ -23,6 +23,7 @@ function App() {
           <Route  path='/sign-in' element={<SignIn/>} />
           <Route  path='/sign-up' element={<SignUp/>} />
         </Routes>
+        <FooterComponent/>
    </BrowserRouter>
   )
 }
