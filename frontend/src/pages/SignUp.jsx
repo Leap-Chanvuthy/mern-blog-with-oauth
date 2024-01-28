@@ -17,7 +17,7 @@ const SignUp = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         if (!formData.username || !formData.email || !formData.password){
-            return setError('Please fill out all the fields');
+            return dispatch(signInFailure('Please fill out all the fields'));
         }
         try {
             dispatch(signInStart());
@@ -29,7 +29,7 @@ const SignUp = () => {
             const data = await res.json();
             console.log(data);
             if(data.success === false){
-                return setError(data.message);
+                dispatch(signInFailure(data.message));
             }
             if(res.ok){
                 dispatch(signInSuccess(data));

@@ -2,9 +2,11 @@ import { Avatar, Button, Dropdown, Navbar, TextInput } from "flowbite-react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { AiOutlineSearch } from "react-icons/ai";
 import { FaMoon, FaSun } from "react-icons/fa";
+import { useSelector } from "react-redux";
 
 const Header = () => {
   const path = useLocation().pathname;
+  const {currentUser} = useSelector(state => state.user);
 
   return (
     <Navbar className="border-b-2">
@@ -32,26 +34,33 @@ const Header = () => {
         <Button className="w-12 h-10 hidden sm:inline" color="gray" pill>
           <FaSun />
         </Button>
-        {/* <Dropdown
-          arrowIcon={false}
-          inline
-          label={<Avatar alt="user" img="https://example.com" rounded />}
-        >
-          <Dropdown.Header>
-            <span className="block text-sm">@currentUser.username</span>
-            <span className="block text-sm font-medium truncate">name</span>
-          </Dropdown.Header>
-          <Link to={"/dashboard?tab=profile"}>
-            <Dropdown.Item>Profile</Dropdown.Item>
-          </Link>
-          <Dropdown.Divider />
-          <Dropdown.Item>Sign out</Dropdown.Item>
-        </Dropdown> */}
+        {currentUser ? (
+          <Dropdown
+                  arrowIcon={false}
+                  inline
+                  label={
+                    <Avatar alt='user' img={currentUser.profilePicture} rounded />
+                  }
+                >
+            <Dropdown.Header>
+              <span className='block text-sm'>@{currentUser.username}</span>
+              <span className='block text-sm font-medium truncate'>
+                {currentUser.email}
+              </span>
+            </Dropdown.Header>
+              <Link to={'/dashboard?tab=profile'}>
+                <Dropdown.Item>Profile</Dropdown.Item>
+              </Link>
+              <Dropdown.Divider />
+              <Dropdown.Item>Sign out</Dropdown.Item>
+          </Dropdown>
+        ) : (
         <Link to="/sign-in">
           <Button className="bg-gray-800" outline>
             Sign In
           </Button>
         </Link>
+        )}
         <Navbar.Toggle />
       </div>
       <Navbar.Collapse>
