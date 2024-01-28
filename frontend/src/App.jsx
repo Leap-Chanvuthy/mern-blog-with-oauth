@@ -7,6 +7,7 @@ import About from './pages/About';
 import Header from './components/Header';
 import FooterComponent from './components/FooterComponent';
 import { BrowserRouter , Routes , Route } from 'react-router-dom';
+import AuthenticatedRoute from './components/AuthenticatedRoute';
 
 
 
@@ -19,7 +20,11 @@ function App() {
           <Route  path='/' element={<Home/>} />
           <Route  path='/about' element={<About/>} />
           <Route  path='/projects' element={<Projects/>} />
-          <Route  path='/dashboard' element={<Dashboard/>} />
+          {/* only authenticated user can see dashboard route */}
+          <Route  element={<AuthenticatedRoute/>} >
+            <Route  path='/dashboard' element={<Dashboard/>} />
+          </Route>
+          {/* only authenticated user can see dashboard route */}
           <Route  path='/sign-in' element={<SignIn/>} />
           <Route  path='/sign-up' element={<SignUp/>} />
         </Routes>
