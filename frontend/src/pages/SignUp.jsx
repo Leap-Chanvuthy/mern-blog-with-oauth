@@ -37,8 +37,7 @@ const SignUp = () => {
             }
         }
         catch (error){
-            setError(error.message);
-            setLoading(false);
+            dispatch(signInFailure(error.message));
         }
     }
 
